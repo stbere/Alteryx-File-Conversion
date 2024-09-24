@@ -22,4 +22,8 @@ Directions: add Alteryx files into the folder that contains the Python script an
 
 python batch_convert_alteryx_files_to_json.py "path/to/directory" "path/to/output/directory"
 
-![image](https://github.com/user-attachments/assets/968bfba1-0be5-4f45-991c-ac2aab2f38d2)
+.
+.
+.
+
+![Beavis](https://tenor.com/view/beavis-computer-pressing-gif-24389723)
