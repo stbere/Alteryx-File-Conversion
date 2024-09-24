@@ -38,15 +38,19 @@ def convert_yxmc_to_json(yxmc_file, output_file):
     # Same logic as convert_yxmd_to_json since .yxmc is also an XML file
     convert_yxmd_to_json(yxmc_file, output_file)
 
+def convert_yxwz_to_json(yxwz_file, output_file):
+    # Same logic as convert_yxmd_to_json since .yxwz is also an XML file
+    convert_yxmd_to_json(yxwz_file, output_file)
+
 def convert_yxzp_to_json(yxzp_file, output_directory):
     try:
         with zipfile.ZipFile(yxzp_file, 'r') as zip_ref:
             zip_ref.extractall(output_directory)
 
         for file in os.listdir(output_directory):
-            if file.endswith('.yxmd') or file.endswith('.yxmc'):
+            if file.endswith('.yxmd') or file.endswith('.yxmc') or file.endswith('.yxwz'):
                 input_file = os.path.join(output_directory, file)
-                output_file = os.path.join(output_directory, file.replace('.yxmd', '.json').replace('.yxmc', '.json'))
+                output_file = os.path.join(output_directory, file.replace('.yxmd', '.json').replace('.yxmc', '.json').replace('.yxwz', '.json'))
                 convert_yxmd_to_json(input_file, output_file)
         
         print(f"Successfully converted {yxzp_file} to JSON files in {output_directory}")
@@ -62,13 +66,16 @@ def batch_convert_alteryx_files_to_json(input_directory, output_directory):
         elif file.endswith('.yxmc'):
             output_file = os.path.join(output_directory, os.path.basename(file).replace('.yxmc', '.json'))
             convert_yxmc_to_json(file, output_file)
+        elif file.endswith('.yxwz'):
+            output_file = os.path.join(output_directory, os.path.basename(file).replace('.yxwz', '.json'))
+            convert_yxwz_to_json(file, output_file)
         elif file.endswith('.yxzp'):
             convert_yxzp_to_json(file, output_directory)
 
 if __name__ == "__main__":
     import argparse
 
-    parser = argparse.ArgumentParser(description='Batch convert Alteryx files (.yxmd, .yxmc, .yxzp) to .json')
+    parser = argparse.ArgumentParser(description='Batch convert Alteryx files (.yxmd, .yxmc, .yxwz, .yxzp) to .json')
     parser.add_argument('input_directory', type=str, help='Path to the input directory containing Alteryx files')
     parser.add_argument('output_directory', type=str, help='Path to the output directory for .json files')
 
