@@ -25,5 +25,3 @@ python batch_convert_alteryx_files_to_json.py "path/to/directory" "path/to/outpu
 .
 .
 .
-
-![Beavis](https://tenor.com/view/beavis-computer-pressing-gif-24389723)
